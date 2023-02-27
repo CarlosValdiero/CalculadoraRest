@@ -2,7 +2,7 @@ package com.carlos.CalculadoraRest.api;
 
 import com.carlos.CalculadoraRest.dto.ExpressaoRequestDTO;
 import com.carlos.CalculadoraRest.dto.ResultadoExpressaoResponseDTO;
-import com.carlos.CalculadoraRest.services.CalculadoraService;
+import com.carlos.CalculadoraRest.service.CalculadoraService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

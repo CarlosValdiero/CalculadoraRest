@@ -1,6 +1,6 @@
 package com.carlos.CalculadoraRest.repository;
 
-import com.carlos.CalculadoraRest.entities.ExpressaoEntity;
+import com.carlos.CalculadoraRest.entity.ExpressaoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

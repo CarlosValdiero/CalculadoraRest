@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 public class ResultadoExpressaoResponseDTO {
-    private String resultado;
+    private final String resultado;
 
     public ResultadoExpressaoResponseDTO(BigDecimal resultado) {
         this.resultado = resultado.toPlainString();

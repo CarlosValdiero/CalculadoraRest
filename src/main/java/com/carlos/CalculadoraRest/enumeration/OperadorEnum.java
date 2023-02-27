@@ -1,4 +1,4 @@
-package com.carlos.CalculadoraRest.utils;
+package com.carlos.CalculadoraRest.enumeration;
 
 import com.carlos.CalculadoraRest.exception.CalculadoraException;
 
@@ -52,7 +52,7 @@ public enum OperadorEnum {
                 .orElseThrow(() -> new CalculadoraException("Tipo de operador não é reconhecido!"));
     }
 
-    private String getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 

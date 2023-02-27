@@ -14,11 +14,6 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(erro.getMessage());
     }
 
-    @ExceptionHandler(value = NaoAutorizadoException.class)
-    public ResponseEntity<?> handleNaoAutorizadoException(final NaoAutorizadoException erro) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(erro.getMessage());
-    }
-
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleHttpMessageNotReadableException(final HttpMessageNotReadableException erro) {
         return ResponseEntity.badRequest().body(erro.getMessage());

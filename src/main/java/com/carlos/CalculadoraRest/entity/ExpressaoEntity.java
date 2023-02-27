@@ -1,4 +1,4 @@
-package com.carlos.CalculadoraRest.entities;
+package com.carlos.CalculadoraRest.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

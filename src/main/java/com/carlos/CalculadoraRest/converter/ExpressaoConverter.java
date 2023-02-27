@@ -1,5 +1,6 @@
 package com.carlos.CalculadoraRest.converter;
 
+import com.carlos.CalculadoraRest.enumeration.OperadorEnum;
 import com.carlos.CalculadoraRest.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -31,18 +32,21 @@ public final class ExpressaoConverter {
 
         return expressaoPosFixada;
     }
-    private static boolean isMaiorPrecedencia(String op, String sub)
-    {
-        return (getPrecedencia(sub) >= getPrecedencia(op));
+    private static boolean isMaiorPrecedencia(String operadorAtual, String operadorAnterior) {
+        return (getPrecedencia(operadorAnterior) >= getPrecedencia(operadorAtual));
     }
 
     private static int getPrecedencia(String operador) {
-        if (operador.equals("+") || operador.equals("-")) {
+        if (isOperador(operador, OperadorEnum.SOMA) || isOperador(operador, OperadorEnum.SUBTRACAO)) {
             return 1;
-        } else if (operador.equals("*") || operador.equals("/")) {
+        } else if (isOperador(operador, OperadorEnum.MULTIPLICACAO) || isOperador(operador, OperadorEnum.DIVISAO)) {
             return 2;
         } else {
             return -1;
         }
+    }
+
+    private static boolean isOperador(String operador, OperadorEnum operadorEnum) {
+        return operador.equals(operadorEnum.getCodigo());
     }
 }

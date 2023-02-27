@@ -1,4 +1,4 @@
-package com.carlos.CalculadoraRest.services;
+package com.carlos.CalculadoraRest.service;
 
 import com.carlos.CalculadoraRest.dto.ResultadoExpressaoResponseDTO;
 import com.carlos.CalculadoraRest.exception.CalculadoraException;

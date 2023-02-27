@@ -1,7 +1,7 @@
-package com.carlos.CalculadoraRest.services;
+package com.carlos.CalculadoraRest.service;
 
 import com.carlos.CalculadoraRest.dto.ResultadoExpressaoResponseDTO;
-import com.carlos.CalculadoraRest.entities.ExpressaoEntity;
+import com.carlos.CalculadoraRest.entity.ExpressaoEntity;
 import com.carlos.CalculadoraRest.repository.ExpressaoRepository;
 import com.carlos.CalculadoraRest.utils.CalculadoraUtils;
 import com.carlos.CalculadoraRest.utils.StringUtils;

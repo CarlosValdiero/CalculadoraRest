@@ -1,5 +1,6 @@
 package com.carlos.CalculadoraRest.utils;
 
+import com.carlos.CalculadoraRest.enumeration.OperadorEnum;
 import com.carlos.CalculadoraRest.converter.ExpressaoConverter;
 
 import java.math.BigDecimal;
