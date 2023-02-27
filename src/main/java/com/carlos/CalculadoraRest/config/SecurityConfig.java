@@ -21,10 +21,9 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore( new TokenAuthenticationFilter(), BasicAuthenticationFilter.class);    // OK ---
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterBefore( new TokenAuthenticationFilter(), BasicAuthenticationFilter.class);
 
         return http.build();
     }

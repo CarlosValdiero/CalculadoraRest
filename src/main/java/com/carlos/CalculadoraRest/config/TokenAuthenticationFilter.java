@@ -1,12 +1,8 @@
 package com.carlos.CalculadoraRest.config;
 
-import com.carlos.CalculadoraRest.exception.CalculadoraException;
-import com.carlos.CalculadoraRest.exception.NaoAutorizadoException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collection;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
@@ -28,18 +24,49 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String token = request.getHeader("Authorization");
         if(token != null && token.equals(BEARER_TOKEN)) {
-            UserDetails userDetails = new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6", new ArrayList<>());
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(userDetails.getUsername(), "b", userDetails.getAuthorities());
-            usernamePasswordAuthenticationToken
-                    .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            // After setting the Authentication in the context, we specify
-            // that the current user is authenticated. So it passes the
-            // Spring Security Configurations successfully.
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(getAutorizacao());
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private Authentication getAutorizacao() {
+        return new Authentication(){
+            @Override
+            public String getName() {
+                return null;
+            }
+
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return null;
+            }
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return null;
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return true;
+            }
+
+            @Override
+            public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+
+            }
+        };
     }
 
 }
