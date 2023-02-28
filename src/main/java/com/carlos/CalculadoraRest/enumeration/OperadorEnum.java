@@ -5,8 +5,6 @@ import com.carlos.CalculadoraRest.exception.CalculadoraException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum OperadorEnum {
 
@@ -39,27 +37,21 @@ public enum OperadorEnum {
         }
     };
 
-    private String codigo;
+    private final String codigo;
 
     private OperadorEnum(final String codigo) {
         this.codigo = codigo;
     }
 
     public static OperadorEnum getPorCodigo(final String codigo) {
-        return Arrays.asList(OperadorEnum.values())
-                .stream().filter(operadorEnum -> operadorEnum.getCodigo().equals(codigo))
+        return Arrays.stream(OperadorEnum.values())
+                .filter(operadorEnum -> operadorEnum.getCodigo().equals(codigo))
                 .findFirst()
                 .orElseThrow(() -> new CalculadoraException("Tipo de operador não é reconhecido!"));
     }
 
     public String getCodigo() {
         return codigo;
-    }
-
-    public static List<String> getCodigos() {
-        return Arrays.asList(OperadorEnum.values())
-                .stream().map(OperadorEnum::getCodigo)
-                .collect(Collectors.toList());
     }
 
     public abstract BigDecimal calcular(BigDecimal direita, BigDecimal esquerda);

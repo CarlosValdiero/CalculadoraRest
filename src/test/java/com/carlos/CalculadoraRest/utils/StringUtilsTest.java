@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 class StringUtilsTest {
 
@@ -14,12 +17,12 @@ class StringUtilsTest {
 
     @Test
     void obterTokensDaExpressaoTest() {
-        final String expressao = "1.2*4+2";
+        final String expressao = "121.22*4+2";
 
         final List<String> tokens = StringUtils.obterTokensDaExpressao(expressao);
 
         Assertions.assertEquals(5, tokens.size());
-        Assertions.assertEquals("1.2", tokens.get(0));
+        Assertions.assertEquals("121.22", tokens.get(0));
         Assertions.assertEquals("*", tokens.get(1));
         Assertions.assertEquals("4", tokens.get(2));
         Assertions.assertEquals("+", tokens.get(3));

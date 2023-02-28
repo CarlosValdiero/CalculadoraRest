@@ -40,6 +40,22 @@ class CalculadoraServiceTest {
     }
 
     @Test
+    void calcularDivisaoTest() {
+        final String expressao = "2.33/3";
+
+        Mockito.when(this.expressaoRepository.getExpressaoPorDescricaoExpressao(expressao))
+                .thenReturn(Optional.empty());
+
+        final ResultadoExpressaoResponseDTO resultado = this.calculadoraService.calcular(expressao);
+
+        Assertions.assertEquals("0.78", resultado.getResultado());
+
+        Mockito.verify(this.expressaoRepository, Mockito.times(1))
+                .save(Mockito.argThat(expressaoSalva -> expressaoSalva.getExpressao().equals(expressao)
+                        && expressaoSalva.getResultado().compareTo(new BigDecimal("0.78")) == 0));
+    }
+
+    @Test
     void calcularErroExpressaoInvalidaTest() {
         final String expressao = "+3*3";
 

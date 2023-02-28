@@ -14,14 +14,11 @@ public final class StringUtils {
     }
 
     public static List<String> obterTokensDaExpressao(final String expressao) {
-
-        final List<String> tokens = Pattern.compile("(([\\d\\+][\\.][\\d\\*]|[\\d])|[/+]|[/*]|[//]|[/-])")
+        return Pattern.compile("-?\\d+(\\.\\d+)?|[/+]|[/*]|[//]|[/-]")
                 .matcher(expressao)
                 .results()
                 .map(MatchResult::group)
                 .collect(Collectors.toList());
-
-        return tokens;
     }
 
     public static boolean isNumero(String token) {

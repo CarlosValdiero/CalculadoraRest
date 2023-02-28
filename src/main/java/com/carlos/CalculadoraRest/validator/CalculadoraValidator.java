@@ -25,7 +25,7 @@ public final class CalculadoraValidator {
                 .collect(Collectors.toList());
 
         if(!matches.isEmpty()) {
-            throw new CalculadoraException(matches.stream().collect(Collectors.joining(". ")));
+            throw new CalculadoraException(String.join(". ", matches));
         }
     }
 
@@ -50,7 +50,7 @@ public final class CalculadoraValidator {
                 .collect(Collectors.toList());
 
         if(!matches.isEmpty()) {
-            throw new CalculadoraException(matches.stream().collect(Collectors.joining(". ")));
+            throw new CalculadoraException(String.join(". ", matches));
         }
     }
 
