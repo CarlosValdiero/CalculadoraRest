@@ -9,109 +9,133 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.crossstore.HashMapChangeSet;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CalculadoraRestApplicationTests {
 
-	public static final String BEARER_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" +
-			".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ" +
-			".SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
-	@Value(value="${local.server.port}")
-	private int port;
+    public static final String BEARER_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" +
+            ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ" +
+            ".SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+    @Value(value = "${local.server.port}")
+    private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@Test
-	@DisplayName("Para expressão 2+2 esperado 4 com sucesso.")
-	public void para2Mais2Experado4ComSucesso() throws Exception {
+    @Test
+    @DisplayName("Para expressão 2+2 esperado 4 com sucesso.")
+    public void para2Mais2Experado4ComSucesso() throws Exception {
 
-		final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2+2");
-		final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
-		final String url = "http://localhost:" + port + "/expressao/calcular";
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2+2");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
 
-		ResponseEntity<ResultadoExpressaoResponseDTO> resp =
-				restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
+        ResponseEntity<ResultadoExpressaoResponseDTO> resp =
+                restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
 
-		Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
-		Assertions.assertEquals("4", Objects.requireNonNull(resp.getBody()).getResultado());
-	}
+        Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
+        Assertions.assertEquals("4", Objects.requireNonNull(resp.getBody()).getResultado());
+    }
 
-	@Test
-	@DisplayName("Para expressão 2.2+2.2 esperado 4.4 com sucesso.")
-	public void ParaCalculoExpressaoSimplesComNumerosReaisEsperadoSucesso() throws Exception {
+    @Test
+    @DisplayName("Para expressão 2.2+2.2 esperado 4.4 com sucesso.")
+    public void ParaCalculoExpressaoSimplesComNumerosReaisEsperadoSucesso() throws Exception {
 
-		final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.2+2.2");
-		final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
-		final String url = "http://localhost:" + port + "/expressao/calcular";
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.2+2.2");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
 
-		ResponseEntity<ResultadoExpressaoResponseDTO> resp =
-				restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
+        ResponseEntity<ResultadoExpressaoResponseDTO> resp =
+                restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
 
-		Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
-		Assertions.assertEquals("4.4", Objects.requireNonNull(resp.getBody()).getResultado());
-	}
+        Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
+        Assertions.assertEquals("4.4", Objects.requireNonNull(resp.getBody()).getResultado());
+    }
 
-	@Test
-	@DisplayName("Para expressão 2.3*2.3+5 esperado 10.29 com sucesso.")
-	public void ParaCalculoExpressaoVariosOperadoresComNumerosReaisEsperadoSucesso() throws Exception {
+    @Test
+    @DisplayName("Para expressão 2.3*2.3+5 esperado 10.29 com sucesso.")
+    public void ParaCalculoExpressaoVariosOperadoresComNumerosReaisEsperadoSucesso() throws Exception {
 
-		final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.3*2.3+5");
-		final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
-		final String url = "http://localhost:" + port + "/expressao/calcular";
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.3*2.3+5");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
 
-		ResponseEntity<ResultadoExpressaoResponseDTO> resp =
-				restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
+        ResponseEntity<ResultadoExpressaoResponseDTO> resp =
+                restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
 
-		Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
-		Assertions.assertEquals("10.29", Objects.requireNonNull(resp.getBody()).getResultado());
-	}
+        Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
+        Assertions.assertEquals("10.29", Objects.requireNonNull(resp.getBody()).getResultado());
+    }
 
-	@Test
-	@DisplayName("Para expressão 2.33/3 esperado 0.78 com sucesso.")
-	public void ParaCalculoExpressaoComDivisaoEsperadoSucesso() throws Exception {
+    @Test
+    @DisplayName("Para expressão 2.33/3 esperado 0.78 com sucesso.")
+    public void ParaCalculoExpressaoComDivisaoEsperadoSucesso() throws Exception {
 
-		final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.33/3");
-		final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
-		final String url = "http://localhost:" + port + "/expressao/calcular";
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("2.33/3");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
 
-		ResponseEntity<ResultadoExpressaoResponseDTO> resp =
-				restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
+        ResponseEntity<ResultadoExpressaoResponseDTO> resp =
+                restTemplate.postForEntity(url, request, ResultadoExpressaoResponseDTO.class);
 
-		Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
-		Assertions.assertEquals("0.78", Objects.requireNonNull(resp.getBody()).getResultado());
-	}
+        Assertions.assertEquals(HttpStatus.OK, resp.getStatusCode());
+        Assertions.assertEquals("0.78", Objects.requireNonNull(resp.getBody()).getResultado());
+    }
 
-	@Test
-	@DisplayName("Para expressão 1/0 esperado erro.")
-	public void ParaCalculoExpressaoComDivisaoPorZeroErro() throws Exception {
+    @Test
+    @DisplayName("Para expressão 1/0 esperado erro de Bad Request")
+    public void ParaCalculoExpressaoComDivisaoPorZeroErro() throws Exception {
 
-		final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("1/0");
-		final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
-		final String url = "http://localhost:" + port + "/expressao/calcular";
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("1/0");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
 
-		ResponseEntity<String> resp =
-				restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> resp =
+                restTemplate.postForEntity(url, request, String.class);
 
-		Assertions.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
-		Assertions.assertEquals("Erro ao tentar calcular a expressão: 1/0.", resp.getBody());
-	}
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+        Assertions.assertEquals("Erro ao tentar calcular a expressão: 1/0.", resp.getBody());
+    }
 
-	private HttpHeaders getHeaders() {
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", BEARER_TOKEN);
-		return headers;
-	}
+    @Test
+    @DisplayName("Requeste sem corpo retorna erro de Bad request")
+    public void ParaRequestSemCorpoErroBadRequest() throws Exception {
+
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(null, getHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
+
+        ResponseEntity<String> resp =
+                restTemplate.postForEntity(url, request, String.class);
+
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+        Assertions.assertEquals("Erro ao tentar calcular a expressão: 1/0.", resp.getBody());
+    }
+
+    @Test
+    @DisplayName("Para request sem token retorna erro de não autorizado")
+    public void ParaRequestSemTokenErroNaoAutorizado() throws Exception {
+
+        final ExpressaoRequestDTO expressao = new ExpressaoRequestDTO("1/1");
+        final HttpEntity<ExpressaoRequestDTO> request = new HttpEntity<>(expressao, new HttpHeaders());
+        final String url = "http://localhost:" + port + "/expressao/calcular";
+
+        ResponseEntity<String> resp =
+                restTemplate.postForEntity(url, request, String.class);
+
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, resp.getStatusCode());
+        Assertions.assertNull(resp.getBody());
+    }
+
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", BEARER_TOKEN);
+        return headers;
+    }
 
 }

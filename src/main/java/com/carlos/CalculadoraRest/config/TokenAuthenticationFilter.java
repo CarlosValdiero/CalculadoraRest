@@ -23,7 +23,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = request.getHeader("Authorization");
-        if(token != null && token.equals(BEARER_TOKEN)) {
+        if (token != null && token.equals(BEARER_TOKEN)) {
             SecurityContextHolder.getContext().setAuthentication(getAutorizacao());
         }
 
@@ -31,7 +31,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private Authentication getAutorizacao() {
-        return new Authentication(){
+        return new Authentication() {
             @Override
             public String getName() {
                 return null;

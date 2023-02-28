@@ -30,9 +30,9 @@ public enum OperadorEnum {
         @Override
         public BigDecimal calcular(BigDecimal direita, BigDecimal esquerda) {
             try {
-                return esquerda.divide(direita, 2, RoundingMode.HALF_UP);
+                return esquerda.divide(direita, 2, RoundingMode.UP);
             } catch (ArithmeticException erro) {
-                throw new CalculadoraException("Erro ao tentar calcular a expressão: "+esquerda+"/"+direita+".");
+                throw new CalculadoraException("Erro ao tentar calcular a expressão: " + esquerda + "/" + direita + ".");
             }
         }
     };

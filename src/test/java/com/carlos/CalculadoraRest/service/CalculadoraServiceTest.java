@@ -1,6 +1,7 @@
 package com.carlos.CalculadoraRest.service;
 
 import com.carlos.CalculadoraRest.dto.ResultadoExpressaoResponseDTO;
+import com.carlos.CalculadoraRest.entity.ExpressaoEntity;
 import com.carlos.CalculadoraRest.exception.CalculadoraException;
 import com.carlos.CalculadoraRest.repository.ExpressaoRepository;
 import org.junit.jupiter.api.Assertions;
@@ -53,6 +54,21 @@ class CalculadoraServiceTest {
         Mockito.verify(this.expressaoRepository, Mockito.times(1))
                 .save(Mockito.argThat(expressaoSalva -> expressaoSalva.getExpressao().equals(expressao)
                         && expressaoSalva.getResultado().compareTo(new BigDecimal("0.78")) == 0));
+    }
+
+    @Test
+    void calcularQuandoExpressaoJaCalculadaTest() {
+        final String expressao = "2.33/3";
+
+        final ExpressaoEntity expressaoEntity = new ExpressaoEntity(expressao, new BigDecimal("0.78"));
+        Mockito.when(this.expressaoRepository.getExpressaoPorDescricaoExpressao(expressao))
+                .thenReturn(Optional.of(expressaoEntity));
+
+        final ResultadoExpressaoResponseDTO resultado = this.calculadoraService.calcular(expressao);
+
+        Assertions.assertEquals("0.78", resultado.getResultado());
+
+        Mockito.verify(this.expressaoRepository, Mockito.times(0)).save(Mockito.any());
     }
 
     @Test

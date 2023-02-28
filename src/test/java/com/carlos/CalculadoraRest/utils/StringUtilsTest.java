@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.regex.MatchResult;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 class StringUtilsTest {
 

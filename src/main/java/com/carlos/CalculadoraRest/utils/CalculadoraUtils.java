@@ -1,7 +1,7 @@
 package com.carlos.CalculadoraRest.utils;
 
-import com.carlos.CalculadoraRest.enumeration.OperadorEnum;
 import com.carlos.CalculadoraRest.converter.ExpressaoConverter;
+import com.carlos.CalculadoraRest.enumeration.OperadorEnum;
 
 import java.math.BigDecimal;
 import java.util.Deque;
@@ -10,7 +10,8 @@ import java.util.List;
 
 public final class CalculadoraUtils {
 
-    private CalculadoraUtils() {}
+    private CalculadoraUtils() {
+    }
 
     public static BigDecimal calcular(final List<String> expressao) {
         final List<String> expressaoPosFixada = ExpressaoConverter.notacaoAlgebricaParaPosFixada(expressao);
@@ -22,7 +23,7 @@ public final class CalculadoraUtils {
         Deque<BigDecimal> pilhaNumeros = new LinkedList<>();
 
         expressaoPosFixada.forEach(token -> {
-            if(StringUtils.isNumero(token)) {
+            if (StringUtils.isNumero(token)) {
                 pilhaNumeros.push(new BigDecimal(token));
             } else {
                 final BigDecimal valorResultante = OperadorEnum.getPorCodigo(token)

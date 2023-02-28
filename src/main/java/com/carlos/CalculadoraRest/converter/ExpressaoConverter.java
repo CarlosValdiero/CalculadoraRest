@@ -10,28 +10,30 @@ import java.util.List;
 
 public final class ExpressaoConverter {
 
-    private ExpressaoConverter() {}
+    private ExpressaoConverter() {
+    }
 
     public static List<String> notacaoAlgebricaParaPosFixada(final List<String> expressaoAlgebrica) {
         Deque<String> pilhaOperadores = new LinkedList<>();
         List<String> expressaoPosFixada = new ArrayList<>();
 
         expressaoAlgebrica.forEach(token -> {
-            if(StringUtils.isNumero(token)) {
+            if (StringUtils.isNumero(token)) {
                 expressaoPosFixada.add(token);
             } else {
-                while ( !pilhaOperadores.isEmpty() && isMaiorPrecedencia(token, pilhaOperadores.peek())) {
+                while (!pilhaOperadores.isEmpty() && isMaiorPrecedencia(token, pilhaOperadores.peek())) {
                     expressaoPosFixada.add(pilhaOperadores.pop());
                 }
                 pilhaOperadores.push(token);
             }
         });
 
-        while ( ! pilhaOperadores.isEmpty())
+        while (!pilhaOperadores.isEmpty())
             expressaoPosFixada.add(pilhaOperadores.pop());
 
         return expressaoPosFixada;
     }
+
     private static boolean isMaiorPrecedencia(String operadorAtual, String operadorAnterior) {
         return (getPrecedencia(operadorAnterior) >= getPrecedencia(operadorAtual));
     }

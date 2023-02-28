@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 @Getter
@@ -14,6 +15,9 @@ public class ResultadoExpressaoResponseDTO {
     private String resultado;
 
     public ResultadoExpressaoResponseDTO(BigDecimal resultado) {
+        if(resultado.scale() > 2) {
+            resultado = resultado.setScale(2, RoundingMode.UP);
+        }
         this.resultado = resultado.toPlainString();
     }
 }

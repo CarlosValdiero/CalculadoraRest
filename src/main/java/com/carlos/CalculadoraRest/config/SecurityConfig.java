@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore( new TokenAuthenticationFilter(), BasicAuthenticationFilter.class);
+                .and().addFilterBefore(new TokenAuthenticationFilter(), BasicAuthenticationFilter.class);
 
         return http.build();
     }

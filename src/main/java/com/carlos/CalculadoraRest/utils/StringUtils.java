@@ -1,16 +1,21 @@
 package com.carlos.CalculadoraRest.utils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public final class StringUtils {
 
-    private StringUtils() {}
+    private StringUtils() {
+    }
 
     public static String removerEspacos(final String texto) {
-        return texto.replaceAll("\\s+","");
+        if (Objects.isNull(texto)) {
+            return null;
+        }
+        return texto.replaceAll("\\s+", "");
     }
 
     public static List<String> obterTokensDaExpressao(final String expressao) {

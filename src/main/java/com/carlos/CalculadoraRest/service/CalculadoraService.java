@@ -30,7 +30,7 @@ public class CalculadoraService {
 
         Optional<ExpressaoEntity> expressaoOptional = expressaoRepository.getExpressaoPorDescricaoExpressao(expressao);
 
-        if(expressaoOptional.isPresent()) {
+        if (expressaoOptional.isPresent()) {
             final BigDecimal resultadoRecuperado = expressaoOptional.get().getResultado();
             log.debug("Resultado da expressão recuperado, resultado: {}.", resultadoRecuperado);
             return new ResultadoExpressaoResponseDTO(resultadoRecuperado);

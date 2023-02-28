@@ -21,7 +21,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<?> handleException(final Exception erro) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro.getMessage());
     }
 }
 
