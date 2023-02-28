@@ -1,8 +1,6 @@
-# Calculardora Rest
+# Calculadora Rest
 
-
-
-### Tecnologias usadas
+### Tecnologias utilizadas
 
 - Spring 2
 - Java 11
@@ -33,3 +31,7 @@ Exemplo response body:
     "resultado": "5.22"
 }
 ```
+
+### Link da descrição da atividade
+
+https://github.com/nextar/desafio-backend
